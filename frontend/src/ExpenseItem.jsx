@@ -14,25 +14,23 @@ function ExpenseItem({expense, onDelete}) {
     }
 
     return (
-        <div className='expense-card'>
-            <div>
+        <div className='expense-card card'>
+            <div className='expense-left'>
                 <h2>{expense.title}</h2>
-                <div className='expense-info'>
-                    <p>Category: </p>
-                    <span style={{ 
+                <div className='expense-meta'>
+                    <span className='badge' style={{ 
                         backgroundColor: getCategory(expense.category),
-                        color: '#ccc',
-                        padding: '12px'
-                     }}
-                     >
+                    }}
+                    >
                         {expense.category}
-                     </span>
-                     <p>{new Date(expense.date).toLocaleDateString('en-GB')}</p>
+                    </span>
                 </div>
             </div>
-            <div>
+            <div className='expense-right'>
                 <p className='amount'>RM {expense.amount.toFixed(2)}</p>
-                <button type='button' className='btn-delete' onClick={() => onDelete(expense.id)}>Delete Expense</button>
+                <button type='button' className='btn-delete' onClick={() => onDelete(expense.id)}>
+                    <i class="fa-regular fa-trash-can"></i>
+                </button>
             </div>
         </div>
     )

@@ -16,14 +16,14 @@ function Calendar({ selectedDate, onSelectDate, currentMonth, onMonthChange, exp
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     return (
-        <div className='calendar'>
+        <div className='calendar card'>
             <div className='calendar-header'>
                 <button onClick={() => onMonthChange(-1)}>
-                    <i class="fa-solid fa-arrow-left"></i>
+                    <i class="fa-solid fa-angle-left"></i>
                 </button>
                 <h2>{monthNames[month]} {year}</h2>
                 <button onClick={() => onMonthChange(1)}>
-                    <i class="fa-solid fa-arrow-right"></i>
+                    <i class="fa-solid fa-angle-right"></i>
                 </button>
             </div>
 
@@ -67,7 +67,11 @@ function Calendar({ selectedDate, onSelectDate, currentMonth, onMonthChange, exp
                             onClick={() => onSelectDate(new Date(year, month, day))}>
 
                                 {day}
-                                {hasExpenses && <span className='expense-dot'></span>}
+                                {hasExpenses && 
+                                <span 
+                                    className='expense-dot'
+                                    style={{ background: isToday ? 'white' : '#ff6b6b' }}>
+                                </span>}
                         </div>
                     )
 

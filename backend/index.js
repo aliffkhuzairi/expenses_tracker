@@ -32,7 +32,6 @@ app.get('/api/expenses', async (req, res) => {
 
 app.post('/api/expenses', async (req, res) => {
     try {
-        console.log('req.body:', req.body);
         const { title, amount, category, date } = req.body;
         const expenses = await prisma.expense.create({
             data: {

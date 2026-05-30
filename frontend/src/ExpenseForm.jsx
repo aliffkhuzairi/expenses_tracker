@@ -28,8 +28,9 @@ function ExpenseForm({onAddExpense, selectedDate}) {
     }
 
     return (
-        <div className='form-card'>
+        <div className='form-card card'>
             <form onSubmit={handleSubmit}>
+                <h2>Add New Expense</h2>
                 <div className='form-field'>
                     <label>Title 
                         <input type='text' name='title' value={formData.title} onChange={handleChange}/>

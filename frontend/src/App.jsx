@@ -9,6 +9,8 @@ function App() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
+  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -73,6 +75,8 @@ function App() {
     )
   })
 
+  const dailyTotal = filteredExpenses.reduce((sum, expense) => sum + expense.amount, 0);
+
   return (
     <>
       <Header title='Expenses Tracker' />
@@ -90,6 +94,10 @@ function App() {
           </div>
 
           <div className='right-panel'>
+              <div className='daily-header'>
+                <h3>{selectedDate.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}</h3>
+                <p className='daily-total'>RM {dailyTotal.toFixed(2)}</p>
+              </div>
             <ExpenseList expenses={filteredExpenses} onDelete={handleDelete} />
           </div>
           
