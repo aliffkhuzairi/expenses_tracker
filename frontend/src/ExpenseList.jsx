@@ -3,7 +3,7 @@ import ExpenseItem from "./ExpenseItem";
 function ExpenseList({expenses, onDelete}) {
 
     if (expenses.length === 0) {
-        return <p style={{ color: '#888', marginTop: '16px' }}>No expenses for this date.</p>
+        return <p style={{ color: '#888', marginTop: '16px', padding: '12px' }}>No expenses for this date.</p>
     }
 
     return (
