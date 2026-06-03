@@ -64,6 +64,39 @@ app.delete('/api/expenses/:id', async (req, res) => {
     }
 })
 
+// GET BUDGET
+app.get('/api/budgets', async (req, res) => {
+    try {
+        const budget = await prisma.budget.findMany({})
+
+        res.json(budget);
+    }
+    catch (err) {
+        console.log(err);
+        res.json({error: "Something went wrong"});
+    }
+})
+
+app.post('/api/budgets', async (req, res) => {
+    try {
+        const { category, amount } = req.body;
+        const budget = await prisma.budget.upsert({
+            where : {category: category},
+            update : {amount: Number(amount)},
+            create : {
+                category,
+                amount: Number(amount)
+            }
+        })
+
+        res.json(budget);
+    }
+    catch (err) {
+        console.log(err);
+        res.json({error: "Something went wrong"});
+    }
+})
+
 app.listen(PORT, () => {
     console.log(`Server is running on  http://localhost:${PORT}`);
 })

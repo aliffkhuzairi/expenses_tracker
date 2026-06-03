@@ -12,15 +12,15 @@ function Home() {
 
     useEffect(() => {
         const fetchData = async () => {
-        try {
-            const res = await fetch('http://localhost:3001/api/expenses');
-            const data = await res.json();
+            try {
+                const res = await fetch('http://localhost:3001/api/expenses');
+                const data = await res.json();
 
-            setExpenses(data);
-        }
-        catch(err) {
-            console.log(err);
-        }
+                setExpenses(data);
+            }
+            catch(err) {
+                console.log(err);
+            }
         }
 
         fetchData();
@@ -28,40 +28,40 @@ function Home() {
 
     const handleAddExpense = async (formData) => {
         try {
-        const res = await fetch('http://localhost:3001/api/expenses', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(formData)
-        });
+            const res = await fetch('http://localhost:3001/api/expenses', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(formData)
+            });
 
-        const newExpense = await res.json();
-        setExpenses(prev => [...prev, newExpense]);
+            const newExpense = await res.json();
+            setExpenses(prev => [...prev, newExpense]);
 
         }
 
         catch(err) {
-        console.log(err);
+            console.log(err);
         }
     }
 
     const handleDelete = async (id) => {
         try {
-        await fetch(`http://localhost:3001/api/expenses/${id}`, {
-            method: 'DELETE'
-        })
+            await fetch(`http://localhost:3001/api/expenses/${id}`, {
+                method: 'DELETE'
+            })
 
-        setExpenses(prev => prev.filter(expense => expense.id !== id));
+            setExpenses(prev => prev.filter(expense => expense.id !== id));
         }
         catch(err) {
-        console.error(err);
+            console.error(err);
         }
     }
 
     const handleMonthChange = (direction) => {
         setCurrentMonth(prev => {
-        const newMonth = new Date(prev);
-        newMonth.setMonth(newMonth.getMonth() + direction)
-        return newMonth;
+            const newMonth = new Date(prev);
+            newMonth.setMonth(newMonth.getMonth() + direction)
+            return newMonth;
         })
     }
 

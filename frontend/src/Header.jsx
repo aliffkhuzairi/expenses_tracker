@@ -8,6 +8,7 @@ function Header({title}) {
                 <nav className='navbar'>
                     <Link to="/">Home</Link>
                     <Link to="/summary">Summary</Link>
+                    <Link to='/budget'>Budget</Link>
                 </nav>
             </div>
         </header>

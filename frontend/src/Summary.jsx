@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, CartesianGrid } from 'recharts';
+import { PieChart, Pie, Cell, BarChart, Bar, XAxis, Tooltip, ResponsiveContainer, Legend, CartesianGrid } from 'recharts';
 
 const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -24,14 +24,21 @@ function Summary() {
     const [expenses, setExpenses] = useState([]);
     const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
     const [selectedMonth, setSelectedMonth] = useState('all');
+    const [budgets, setBudgets] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch('http://localhost:3001/api/expenses');
-                const data = await res.json();
+                const [ expenseRes, budgetRes ]= await Promise.all([
+                    fetch('http://localhost:3001/api/expenses'),
+                    fetch('http://localhost:3001/api/budgets')
+                ])
+                ;
+                const expenseData = await expenseRes.json();
+                const budgetData = await budgetRes.json();
 
-                setExpenses(data);
+                setExpenses(expenseData);
+                setBudgets(budgetData);
             }
             catch(err) {
                 console.log(err);
@@ -88,6 +95,11 @@ function Summary() {
     const total = filteredExpense.reduce((sum, e) => sum + e.amount, 0);
     const topCategory = Object.entries(byCategory).sort((a, b) => b[1] - a[1])[0];
     const transactionCount = filteredExpense.length;
+
+    const budgetMap = budgets.reduce((acc, b) => {
+        acc[b.category] = b.amount;
+        return acc;
+    }, {});
 
     return (
         <div className='container'>
@@ -169,12 +181,34 @@ function Summary() {
                         <h3>By Category</h3>
                         {Object.entries(byCategory).length === 0
                             ? <p style={{ color: '#888', fontSize: '14px' }}>No expenses for this period.</p>
-                            : Object.entries(byCategory).map(([category, amount]) => (
-                                <div key={category}>
-                                    <span>{category}</span>
-                                    <span>RM {amount.toFixed(2)}</span>
-                                </div>
-                        ))}
+                            : Object.entries(byCategory).map(([category, amount]) => {
+                                const budget = budgetMap[category];
+                                const percent = budget ? Math.min((amount / budget) * 100, 100) : null;
+
+                                return (
+                                    <div key={category} className='category-row'>
+                                        <div className='category-info'>
+                                            <span>{category}</span>
+                                            <span>RM {amount.toFixed(2)} {budget && selectedMonth !== 'all' ? `/ RM ${budget}` : ''}</span>
+                                        </div>
+                                        <div className='category-progress'>
+                                            {budget && selectedMonth !== 'all' && (
+                                                <div className='progress-bar-bg'>
+                                                    <div className='progress-bar-fill'
+                                                        style={{ 
+                                                            width: `${percent}%`,
+                                                            background: percent >= 100 ? '#ff4444' : percent >= 80 ? '#FF9800' : '#4CAF50'
+                                                        }}
+                                                    >
+
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                        
+                                    </div>    
+                                );   
+                        })}
                     </div>
                     <div className='chart-card card'>
                         <h3>Spending by Category</h3>
