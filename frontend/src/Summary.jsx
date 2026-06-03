@@ -30,8 +30,8 @@ function Summary() {
         const fetchData = async () => {
             try {
                 const [ expenseRes, budgetRes ]= await Promise.all([
-                    fetch('http://localhost:3001/api/expenses'),
-                    fetch('http://localhost:3001/api/budgets')
+                    fetch(`${import.meta.env.VITE_API_URL}/api/expenses`),
+                    fetch(`${import.meta.env.VITE_API_URL}/api/budgets`)
                 ])
                 ;
                 const expenseData = await expenseRes.json();

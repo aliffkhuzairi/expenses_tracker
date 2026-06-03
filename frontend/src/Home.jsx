@@ -13,7 +13,7 @@ function Home() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch('http://localhost:3001/api/expenses');
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/expenses`);
                 const data = await res.json();
 
                 setExpenses(data);
@@ -28,7 +28,7 @@ function Home() {
 
     const handleAddExpense = async (formData) => {
         try {
-            const res = await fetch('http://localhost:3001/api/expenses', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/expenses`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(formData)
@@ -46,7 +46,7 @@ function Home() {
 
     const handleDelete = async (id) => {
         try {
-            await fetch(`http://localhost:3001/api/expenses/${id}`, {
+            await fetch(`${import.meta.env.VITE_API_URL}/api/expenses/${id}`, {
                 method: 'DELETE'
             })
 

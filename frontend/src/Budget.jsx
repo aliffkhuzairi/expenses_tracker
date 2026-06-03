@@ -18,7 +18,7 @@ function Budget() {
     useEffect(() => {
         try {
             const fetchData = async () => {
-                const res = await fetch('http://localhost:3001/api/budgets');
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/budgets`);
                 const data = await res.json();
 
                 const budgetObj = {};
@@ -36,7 +36,7 @@ function Budget() {
 
     const handleSave = async (category) => {
         try {
-            const res = await fetch('http://localhost:3001/api/budgets', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/budgets`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({category, amount: budgets[category] })
