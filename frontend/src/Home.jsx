@@ -9,7 +9,7 @@ function Home() {
     const [currentMonth, setCurrentMonth] = useState(new Date());
 
     useEffect(() => {
-        console.log('API URL:', import.meta.env.VITE_API_URL);
+        
         const fetchData = async () => {
             try {
                 const res = await fetch(`${import.meta.env.VITE_API_URL}/api/expenses`);
