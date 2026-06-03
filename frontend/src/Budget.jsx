@@ -11,6 +11,8 @@ function Budget() {
         Others: ''
     });
 
+    const [saved, setSaved] = useState('');
+
     const categories = ['Food', 'Transport', 'Entertainment', 'Utilities', 'Shopping', 'Others'];
 
     useEffect(() => {
@@ -41,6 +43,8 @@ function Budget() {
             });
 
             const newBudget = await res.json();
+            setSaved(category);
+            setTimeout(() => setSaved(''), 2000);
             console.log('Saved:', newBudget);
         }
 
@@ -76,6 +80,7 @@ function Budget() {
                                 value={budgets[category]}
                                 onChange={(e) => setBudgets(prev => ({...prev, [category]: e.target.value}))} />
                                 <button onClick={() => handleSave(category)}>Save</button>
+                                {saved === category && <span style={{ color: '#4CAF50', fontSize: '13px' }}>✅ Saved</span>}
                         </div>
                         
                     </div>

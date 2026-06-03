@@ -8,10 +8,18 @@ function ExpenseForm({onAddExpense, selectedDate}) {
         category: '',
     });
 
+    const [saved, setSaved] = useState(false);
+    const [error, setError] = useState('');
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if(!formData.title || !formData.amount) return;
+        if(!formData.title || !formData.amount || !formData.category) {
+            setError('Please fill in all fields.');
+            return;
+        }
+
+        setError('');
 
         onAddExpense({...formData, date: selectedDate});
 
@@ -20,6 +28,9 @@ function ExpenseForm({onAddExpense, selectedDate}) {
             amount: '',
             category: '',
         })
+
+        setSaved(true);
+        setTimeout(() => setSaved(false), 3000);
     }
 
     const handleChange = (e) => {
@@ -54,6 +65,10 @@ function ExpenseForm({onAddExpense, selectedDate}) {
 
                 </div>
                 <button type='submit' className='btn-add'>Add Expense</button>
+                {error && <p className='error-message'>{error}</p>}
+                {saved && (
+                    <p className='success-message'>✅ Expense added successfully!</p>
+                )}
             </form>
         </div>
     )

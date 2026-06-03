@@ -247,6 +247,20 @@ body {
     opacity: 0.9;
 }
 
+.success-message {
+    color: #4CAF50;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 8px;
+}
+
+.error-message {
+    color: #ff4444;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 8px;
+}
+
 /* EXPENSE CARD */
 .expense-card-list {
     display: flex;
@@ -489,6 +503,7 @@ body {
 .budget-input {
     display: flex;
     gap: 12px;
+    align-items: center;
 }
 
 .budget-layout input {
