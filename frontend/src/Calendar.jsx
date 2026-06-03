@@ -5,11 +5,6 @@ function Calendar({ selectedDate, onSelectDate, currentMonth, onMonthChange, exp
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const startingDay = new Date(year, month, 1).getDay();
 
-    console.log('Year:', year);
-    console.log('Month:', month);
-    console.log('Days in month:', daysInMonth);
-    console.log('Starting day:', startingDay);
-
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'];
 
