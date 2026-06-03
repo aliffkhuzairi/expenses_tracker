@@ -2,6 +2,8 @@
 
 A full-stack expense tracking web app built with React, Node.js, Express, and PostgreSQL. Users can log daily expenses through a calendar interface, track spending by category, set monthly budget limits, and view visual summaries with charts.
 
+**Live demo:** https://expenses-tracker-v2-ashy.vercel.app/
+
 ---
 
 ### Home Page
@@ -75,6 +77,11 @@ A full-stack expense tracking web app built with React, Node.js, Express, and Po
 - Prisma ORM (v5)
 - PostgreSQL
 
+### Cloud & Deployment
+- Vercel (frontend hosting)
+- Render (backend hosting)
+- Neon (managed PostgreSQL)
+
 ### Tools
 - Nodemon (development auto-restart)
 - Prisma Studio (database GUI)
@@ -106,6 +113,7 @@ expenses-tracker-v2/
 │   │   ├── migrations/
 │   │   └── schema.prisma
 │   ├── .env
+│   ├── .env.example
 │   ├── index.js
 │   └── package.json
 ├── frontend/
@@ -120,6 +128,8 @@ expenses-tracker-v2/
 │   │   ├── ExpenseItem.jsx
 │   │   ├── Header.jsx
 │   │   └── index.css
+│   ├── .env
+│   ├── .env.example
 │   ├── index.html
 │   └── package.json
 ├── .gitignore
@@ -185,6 +195,17 @@ npm run dev
 ```bash
 cd frontend
 npm install
+```
+
+Create a `.env` file:
+
+```env
+VITE_API_URL=http://localhost:3001
+```
+
+Start the frontend:
+
+```bash
 npm run dev
 ```
 
@@ -192,6 +213,28 @@ Open in browser:
 
 ```
 http://localhost:5173
+```
+
+---
+
+## Deployment
+
+| Service | Purpose | URL |
+|---------|---------|-----|
+| Vercel | Frontend hosting | https://expenses-tracker-v2-ashy.vercel.app/ |
+| Render | Backend hosting | https://expenses-tracker-api-eomg.onrender.com |
+| Neon | Managed PostgreSQL | https://neon.tech |
+
+### Environment Variables
+
+**Frontend (Vercel):**
+```
+VITE_API_URL=https://expenses-tracker-api-eomg.onrender.com
+```
+
+**Backend (Render):**
+```
+DATABASE_URL=your-neon-connection-string
 ```
 
 ---
@@ -228,6 +271,8 @@ http://localhost:5173
 - Using React Router for client-side navigation
 - Writing conventional Git commit messages
 - Deploying a full-stack app with separate frontend and backend services
+- Managing separate development and production environments
+- Using cloud services: Vercel, Render, and Neon
 
 ---
 
