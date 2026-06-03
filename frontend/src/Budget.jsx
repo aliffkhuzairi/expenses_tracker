@@ -49,20 +49,38 @@ function Budget() {
         }
     }
 
+    const getCategory = (category) => {
+        const colors = {
+            Food: '#4CAF50',
+            Transport: '#2196F3',
+            Entertainment: '#9C27B0',
+            Utilities: '#FF9800',
+            Shopping: '#E91E63',
+            Others: '#607D8B'
+        }
+
+        return colors[category] || '#607D8B';
+    }
+
     return (
         <div className='container'>
-            <h2>Setup your monthly budget</h2>
-            {categories.map(category => (
-                <div key={category}>
-                    <label>{category}</label>
-                    <input 
-                        type='number'
-                        value={budgets[category]}
-                        onChange={(e) => setBudgets(prev => ({...prev, [category]: e.target.value}))} />
-
-                    <button onClick={() => handleSave(category)}>Save</button>
-                </div>
-            ))}
+            <div className='budget-card card'>
+                <h2>Budget Settings</h2>
+                <p style={{ color: '#6d6d6d', marginTop: '8px'}}>Set your monthly spending limits</p>
+                {categories.map(category => (
+                    <div className='budget-layout' key={category}>
+                        <label style={{ backgroundColor: getCategory(category)}}>{category}</label>
+                        <div className='budget-input'>
+                            <input 
+                                type='number'
+                                value={budgets[category]}
+                                onChange={(e) => setBudgets(prev => ({...prev, [category]: e.target.value}))} />
+                                <button onClick={() => handleSave(category)}>Save</button>
+                        </div>
+                        
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }

@@ -456,20 +456,68 @@ body {
 }
 
 .progress-bar-bg {
-  background: #f0f0f0;
-  border-radius: 999px;
-  height: 8px;
-  width: 100%;
-  position: relative;
+    background: #f0f0f0;
+    border-radius: 999px;
+    height: 8px;
+    width: 100%;
+    position: relative;
 }
 
 .progress-bar-fill {
     position: absolute;
     left: 0;
     top: 0;
-  height: 8px;
-  border-radius: 999px;
-  transition: width 0.3s ease;
+    height: 8px;
+    border-radius: 999px;
+    transition: width 0.3s ease;
+}
+
+.budget-layout {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: 150px 1fr auto;
+    gap: 12px;
+    align-items: center;
+}
+
+.budget-layout label {
+    color: #fff;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.budget-input {
+    display: flex;
+    gap: 12px;
+}
+
+.budget-layout input {
+    padding: 10px 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.budget-layout input:focus {
+    border-color: #667eea;
+}
+
+.budget-layout button {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+}
+
+.budget-layout button:hover {
+    opacity: 0.9;
 }
 
 
